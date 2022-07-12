@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.java.dao.MemberDAO;
-import com.java.dao.MemberDAOImpl;
 import com.java.dto.MemberVO;
 
 public class MemberServiceImpl implements MemberService {
