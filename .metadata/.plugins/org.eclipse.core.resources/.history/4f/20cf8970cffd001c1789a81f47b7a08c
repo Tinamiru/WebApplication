@@ -1,0 +1,34 @@
+package com.java.service;
+
+import static org.junit.Assert.assertEquals;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.java.dao.MemberDAO;
+import com.java.dao.MemberDAOImpl;
+import com.java.dto.MemberVO;
+
+public class TestMemberServiceImpl {
+
+	private MemberServiceImpl memberService;
+	private MemberDAO memberDAO;
+
+	@Before
+	public void init() throws Exception {
+		memberService = new MemberServiceImpl();
+		memberDAO = new MemberDAOImpl();
+		memberService.setMemberDAO(memberDAO);
+	}
+
+	@Test
+	public void testGetMemberList() throws SQLException {
+		List<MemberVO> memberList = memberService.getMemberList();
+		Assert.assertEquals(8, memberList.size());
+	}
+
+}

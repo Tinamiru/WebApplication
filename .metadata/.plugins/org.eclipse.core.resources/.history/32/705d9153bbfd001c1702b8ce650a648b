@@ -1,0 +1,21 @@
+package com.java.datasource;
+
+import java.sql.Connection;
+import java.util.Properties;
+
+public class JDBCDataSource {
+	private JDBCDataSource instance = new JDBCDataSource();
+
+	private Connection conn;
+
+	private JDBCDataSource() {
+	}
+
+	{
+		Properties properties = new Properties();
+	}
+
+	public Connection getConnection() throws Exception {
+		return conn;
+	}
+}

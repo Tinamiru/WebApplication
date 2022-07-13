@@ -1,0 +1,27 @@
+package com.java.basic;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Gugudan {
+
+
+	public static void main(String[] args) {
+		Gugudan gugudan = new Gugudan();
+		gugudan.gugudan();
+	}
+
+	private void view_dan(int dan) {
+		System.out.println(dan + "단");
+	}
+
+	private void view_result(int dan, int gop) {
+		System.out.println(dan + " * " + gop + " = " + (dan * gop));
+	}
+
+	private void view_space() {
+		System.out.println();
+	}
+
+}

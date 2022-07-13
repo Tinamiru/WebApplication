@@ -1,0 +1,18 @@
+package com.java.basic;
+
+public class Gugudan {
+
+	private Service service;
+
+	{
+		service = new GugudanService();
+		Input input = new GugudanInput();
+		Output output = new GugudanOutput();
+		GugudanService gugudanService = (GugudanService) service;
+	}
+
+	public static void main(String[] args) {
+		Gugudan main = new Gugudan();
+		main.service.process();
+	}
+}

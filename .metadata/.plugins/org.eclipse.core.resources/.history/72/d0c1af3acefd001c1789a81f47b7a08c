@@ -1,0 +1,17 @@
+package com.java.service;
+
+import org.junit.Before;
+
+import com.java.dao.MemberDAO;
+
+public class TestMemberServiceImpl {
+
+	private MemberService memberService;
+	private MemberDAO memberDAO;
+
+	@Before
+	public void init() throws Exception {
+
+	}
+
+}

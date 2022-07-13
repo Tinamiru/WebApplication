@@ -1,0 +1,12 @@
+package com.java.basic;
+
+
+public class Gugudan {
+
+	private Service service;
+
+	public static void main(String[] args) {
+		Gugudan main = new Gugudan();
+		main.service.process();
+	}
+}

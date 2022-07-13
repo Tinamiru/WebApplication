@@ -1,0 +1,10 @@
+package com.java.basic;
+
+public class GugudanService implements Service{
+
+	@Override
+	public void process() {
+		
+	}
+
+}

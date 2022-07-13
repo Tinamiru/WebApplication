@@ -1,0 +1,82 @@
+package servlet_basic;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Gugudan {
+
+	int start;
+	int end;
+
+	public static void main(String[] args) {
+		Gugudan gugudan = new Gugudan();
+//		gugudan.start_input();
+//		gugudan.end_input();
+		gugudan.gugudan();
+	}
+
+	private Map<String, Integer> inputData() {
+		Map<String, Integer> data = new HashMap<String, Integer>();
+		Scanner sc = new Scanner(System.in);
+		System.out.print("단수 >>");
+		data.put("dan", Integer.parseInt(sc.nextLine()));
+		System.out.print("곱수 >>");
+		data.put("gop", Integer.parseInt(sc.nextLine()));
+		return data;
+	}
+
+//	private void end_input() {
+//		System.out.print("곱수 >>");
+//		setEnd(sc.nextInt());
+//	}
+//
+//	private void start_input() {
+//		System.out.print("단수 >>");
+//		setStart(sc.nextInt());
+//	}
+
+	private void view_dan(int dan) {
+		System.out.println(dan + "단");
+	}
+
+	private void view_result(int dan, int gop) {
+		System.out.println(dan + " * " + gop + " = " + (dan * gop));
+	}
+
+	private void view_space() {
+		System.out.println();
+	}
+
+	private void gugudan() {
+		Map<String, Integer> data = inputData();
+		
+		int dan = data.get("dan");
+		int gop = data.get("gop");
+		
+		for (int i = dan; i < gop + 1; i++) {
+			view_dan(i);
+			for (int j = 1; j < gop + 1; j++) {
+				view_result(i, j);
+			}
+			view_space();
+		}
+	}
+	
+//	public int getStart() {
+//		return start;
+//	}
+//
+//	public void setStart(int start) {
+//		this.start = start;
+//	}
+//
+//	public int getEnd() {
+//		return end;
+//	}
+//
+//	public void setEnd(int end) {
+//		this.end = end;
+//	}
+
+}

@@ -1,0 +1,20 @@
+package com.java.basic;
+
+public class GugudanOutput implements Output{
+
+	@Override
+	public void view() {
+		
+	}
+
+	@Override
+	public void view(int dan) {
+		
+	}
+
+	@Override
+	public void view(int dan, int gop) {
+		
+	}
+
+}

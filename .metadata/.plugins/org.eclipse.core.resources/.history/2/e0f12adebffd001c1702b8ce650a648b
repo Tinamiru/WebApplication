@@ -1,0 +1,57 @@
+package com.spring.datasource;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.java.datasource.JDBCDataSource;
+import com.java.dto.MemberVO;
+
+public class TestJDBCDataSourece {
+
+	private Connection conn;
+
+	@Before
+	public void init() throws Exception {
+		JDBCDataSource dataSource = JDBCDataSource.getInstance();
+		conn = dataSource.getConnection();
+	}
+
+	@Test
+	public void selectMember() {
+		String testID = "mimi";
+
+		String sql = "select * from member";
+		
+		MemberVO member = new MemberVO();
+		
+		while (rs.next()) {
+			member = new MemberVO(rs.getString("id"),rs.getString("pwd"));
+			member.setId(rs.getString("id"));
+			member.setPwd(rs.getString("pwd"));
+			member.setName(rs.getString("name"));
+			member.setPhone(rs.getString("phone"));
+			member.setEmail(rs.getString("email"));
+			member.setAddress(rs.getString("address"));
+			member.setPicture(rs.getString("picture"));
+
+			memberList.add(member);
+		}
+		
+		
+		
+	}
+
+	@Test
+	public void test2() {
+	}
+
+	@After
+	public void complate() throws Exception {
+		if (conn != null)
+			conn.close();
+	}
+}
