@@ -1,5 +1,0 @@
-package com.java.basic;
-
-public class GugudanOutput implements Output{
-
-}

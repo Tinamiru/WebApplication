@@ -1,8 +1,0 @@
-package com.java.basic;
-
-public interface Output {
-
-	public void view_dan(int dan) ;
-	public void view_result(int dan, int gop);
-	public void view_space();
-}
