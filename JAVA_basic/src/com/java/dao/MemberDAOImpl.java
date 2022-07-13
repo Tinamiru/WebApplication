@@ -1,12 +1,14 @@
 package com.java.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.java.datasource.JDBCDataSource;
 import com.java.dto.MemberVO;
@@ -25,14 +27,9 @@ public class MemberDAOImpl implements MemberDAO {
 		}
 
 		String sql = "select * from member";
-		ResultSet rs;
-		try {
-			Statement stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		}
+
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
 
 		List<MemberVO> memberList = new ArrayList<MemberVO>();
 		MemberVO member;
@@ -55,6 +52,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 			memberList.add(member);
 		}
+
 		return memberList;
 	}
 
@@ -67,20 +65,16 @@ public class MemberDAOImpl implements MemberDAO {
 			e.printStackTrace();
 		}
 
-		String sql = "select * from member where id = ?";
-		ResultSet rs;
-		try {
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, id);
+		PreparedStatement ptmt = null;
+		ResultSet rs = null;
 
-			rs = pstmt.executeQuery();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
-		}
+		String sql = "select * " + " from member" + " where id=?";
+
+		ptmt = conn.prepareStatement(sql);
+		ptmt.setString(1, id);
+		rs = ptmt.executeQuery();
 
 		MemberVO member = new MemberVO();
-
 		if (rs.next()) {
 			member.setId(rs.getString("id"));
 			member.setPwd(rs.getString("pwd"));
@@ -94,9 +88,11 @@ public class MemberDAOImpl implements MemberDAO {
 			member.setRegDate(rs.getDate("regDate"));
 			member.setAuthority(rs.getString("authority"));
 			member.setEnabled(rs.getInt("enabled"));
-
 		}
+		
 		return member;
+
 	}
 
+	
 }

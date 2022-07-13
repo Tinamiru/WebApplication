@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JAVA_basic.iml" filepath="$PROJECT_DIR$/JAVA_basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JAVA_basic/JAVA_basic.iml" filepath="$PROJECT_DIR$/JAVA_basic/JAVA_basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Servers/Servers.iml" filepath="$PROJECT_DIR$/Servers/Servers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/servlet_basic/servlet_basic.iml" filepath="$PROJECT_DIR$/servlet_basic/servlet_basic.iml" />
     </modules>
   </component>
 </project>

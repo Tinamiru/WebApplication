@@ -12,7 +12,8 @@
 	
 	
 	<select id="selectMemberById" parameterType="str" resultType="member">
-		select *
+		select
+		*
 		from member
 		where id=#{id}
 	</select>
@@ -27,7 +28,7 @@
 		update member 
 		set 
 		pwd=#{pwd},email=#{email},phone=#{phone},name=#{name},
-		picture=#{picture}
+		picture=#{picture},enabled=1
 		
 		<if test="authority != null">
 			,authority=#{authority}

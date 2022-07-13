@@ -6,10 +6,10 @@ import java.util.List;
 import com.java.dto.MemberVO;
 
 public interface MemberService {
-
-	// 회원목록조회
-	List<MemberVO> getMemberList() throws SQLException;
-
-	// 회원상세조회
-	MemberVO getMember(String id) throws SQLException;
+	
+	//회원목록조회
+	List<MemberVO> getMemberList()throws SQLException;
+	
+	//회원상세조회
+	MemberVO getMember(String id)throws SQLException;
 }
