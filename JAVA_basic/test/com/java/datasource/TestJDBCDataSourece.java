@@ -48,12 +48,3 @@ public class TestJDBCDataSourece {
 	}
 }
 
-
-
-
-
-
-
-
-
-
