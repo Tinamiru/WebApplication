@@ -12,8 +12,8 @@ public class OperatorImpl implements Operator {
 	}
 
 	@Override
-	public int operator(int firstNum, int secondNum, String operator) {
-		int result = 0;
+	public Number operator(Number firstNum, Number secondNum, String operator) {
+		Number result = 0;
 		switch (operator) {
 		case "+":
 			result = add(firstNum, secondNum);
@@ -28,26 +28,35 @@ public class OperatorImpl implements Operator {
 			result = divide(firstNum, secondNum);
 			break;
 		}
-		return result;
+		// "0이하의 소수점이 없을경우"
+		if (true) {
+			return (Integer) result;
+		} else {
+			return (Double) result;
+		}
 	}
 
 	@Override
-	public int add(int firstNum, int secondNum) {
-		return firstNum + secondNum;
+	public Number add(Number firstNum, Number secondNum) {
+		return (Double) firstNum * (Double) secondNum;
 	}
 
 	@Override
-	public int subtract(int firstNum, int secondNum) {
-		return firstNum - secondNum;
+	public Number subtract(Number firstNum, Number secondNum) {
+		return (Double) firstNum * (Double) secondNum;
 	}
 
 	@Override
-	public int multiply(int firstNum, int secondNum) {
-		return firstNum * secondNum;
+	public Number multiply(Number firstNum, Number secondNum) {
+		return (Double) firstNum * (Double) secondNum;
 	}
 
 	@Override
-	public int divide(int firstNum, int secondNum) {
-		return firstNum / secondNum;
+	public Number divide(Number firstNum, Number secondNum) {
+		if ((int) secondNum == 0) {
+			return 0;
+		} else {
+			return (Double) firstNum * (Double) secondNum;
+		}
 	}
 }

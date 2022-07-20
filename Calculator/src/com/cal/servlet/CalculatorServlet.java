@@ -21,13 +21,13 @@ public class CalculatorServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String url = "/calculator.jsp";
 
-		int firstNum = Integer.parseInt(request.getParameter("firstNum"));
-		int secondNum = Integer.parseInt(request.getParameter("secondNum"));
+		Number firstNum = Integer.parseInt(request.getParameter("firstNum"));
+		Number secondNum = Integer.parseInt(request.getParameter("secondNum"));
 
 		String operator = request.getParameter("operator");
 
-		Operator operatorImol = OperatorImpl.getInstance();
-		int result = operatorImol.operator(firstNum, secondNum, operator);
+		Operator operatorImpl = OperatorImpl.getInstance();
+		Number result = operatorImpl.operator(firstNum, secondNum, operator);
 
 		request.setAttribute("result", result);
 
