@@ -2,17 +2,14 @@
 	text-align: center;
 	fontSize: 1.5em;
 	background-color: grey;
-	width: 17%;
-	margin: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	float: left;
+	width: 70.5px;
 	border-radius: 400px;
 	color: white;
 	font-size: 18px;
 }
 
 #out {
+	height: 25px;
 	background-color: gray;
 	color: white;
 }
@@ -23,19 +20,12 @@
 
 .wrapper {
 	border: 5px solid black;
-	width: 320px;
-	height: 450px;
-	padding-left: 22px;
-	padding-top: 22px;
-	position: relative;
-	align-items: center;
 	background-color: #bcbcbc;
-	position: relative;
+	float : left;
 }
 
 input {
 	width: 95%;
-	height: 40px;
 	text-align: right;
 }
 
@@ -59,7 +49,9 @@ input {
 	boder-bottom: 0px;
 	border: none;
 }
-
+#show{
+	height: 42px;
+}
 #send {
 	background-color: #000080;
 }
