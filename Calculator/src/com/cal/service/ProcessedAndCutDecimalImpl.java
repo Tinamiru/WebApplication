@@ -2,8 +2,10 @@ package com.cal.service;
 
 import java.text.NumberFormat;
 
-public class ProcessedAndCutDecimalImpl implements ProcessedAndCutDecimal{
-	
+public class ProcessedAndCutDecimalImpl implements ProcessedAndCutDecimal {
+
+	AlertFlagSetup alertFlagSetupImpl = AlertFlagSetupImpl.getInstance();
+
 	static ProcessedAndCutDecimal processedAndCutDecimal = new ProcessedAndCutDecimalImpl();
 
 	private ProcessedAndCutDecimalImpl() {
@@ -12,12 +14,13 @@ public class ProcessedAndCutDecimalImpl implements ProcessedAndCutDecimal{
 	public static ProcessedAndCutDecimal getInstance() {
 		return processedAndCutDecimal;
 	}
-	
+
 	public Number processed(double processedNumber) {
 		if (processedNumber % 1 == 0) {
 			return (long) processedNumber;
 		} else {
-			return cutDecimal(4, processedNumber);
+			alertFlagSetupImpl.isCutOffDecimal(true);
+			return cutDecimal(6, processedNumber);
 		}
 	}
 

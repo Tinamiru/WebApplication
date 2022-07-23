@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.cal.service.AlertFlagSetup;
+import com.cal.service.AlertFlagSetupImpl;
 import com.cal.service.Operator;
 import com.cal.service.OperatorImpl;
 import com.cal.service.ProcessedAndCutDecimal;
@@ -25,6 +27,7 @@ public class CalculatorServlet extends HttpServlet {
 		request.setAttribute("formula", "");
 		request.setAttribute("operator", "");
 		request.setAttribute("secondOpper", "");
+		request.setAttribute("alertFlag", "false");
 
 		request.getRequestDispatcher(url).forward(request, response);
 	}
@@ -39,20 +42,23 @@ public class CalculatorServlet extends HttpServlet {
 		double secondNum = Double.parseDouble(request.getParameter("secondNum"));
 		String secondOpper = request.getParameter("secondOpper");
 
-		ProcessedAndCutDecimal processedAndCutDecimal = ProcessedAndCutDecimalImpl.getInstance();
+		ProcessedAndCutDecimal processedAndCutDecimalImpl = ProcessedAndCutDecimalImpl.getInstance();
 		Operator operatorImpl = OperatorImpl.getInstance();
+		AlertFlagSetup alertFlagSetupImpl = AlertFlagSetupImpl.getInstance();
 
 		Number result = operatorImpl.operator(firstNum, secondNum, operator);
-		Number firstNumForformula = processedAndCutDecimal.processed(firstNum);
-		Number secondNumForformula = processedAndCutDecimal.processed(secondNum);
+		Number firstNumForformula = processedAndCutDecimalImpl.processed(firstNum);
+		Number secondNumForformula = processedAndCutDecimalImpl.processed(secondNum);
 
 		String formula = firstNumForformula + " " + operator + " " + secondNumForformula + " = " + result + " "
 				+ secondOpper;
+		boolean alertFlag = alertFlagSetupImpl.alertFlagResult();
 
 		request.setAttribute("result", result);
 		request.setAttribute("operator", secondOpper);
 		request.setAttribute("secondOpper", secondOpper);
 		request.setAttribute("formula", formula);
+		request.setAttribute("alertFlag", alertFlag);
 
 		request.getRequestDispatcher(url).forward(request, response);
 	}

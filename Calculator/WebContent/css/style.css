@@ -2,16 +2,25 @@
 	text-align: center;
 	fontSize: 1.5em;
 	background-color: grey;
-	width: 70.5px;
+	width: 70%;
+	margin: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	float: left;
 	border-radius: 400px;
 	color: white;
 	font-size: 18px;
 }
 
 #out {
-	height: 25px;
 	background-color: gray;
 	color: white;
+	height: 30px;
+	font-size: 16px;
+	font-style: italic;
+}
+#show {
+	height: 40px;
 }
 
 .op {
@@ -20,8 +29,14 @@
 
 .wrapper {
 	border: 5px solid black;
+	width: 340px;
+	height: 480px;
+	padding-left: 22px;
+	padding-top: 22px;
+	position: relative;
+	align-items: center;
 	background-color: #bcbcbc;
-	float : left;
+	position: relative;
 }
 
 input {
@@ -49,9 +64,7 @@ input {
 	boder-bottom: 0px;
 	border: none;
 }
-#show{
-	height: 42px;
-}
+
 #send {
 	background-color: #000080;
 }
@@ -59,4 +72,33 @@ input {
 #del {
 	background-color: black;
 	color: white;
+}
+
+td{
+	width: 70px;
+}
+
+#toast {
+	width: 50%;
+	align: center;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    padding: 15px 20px;
+    transform: translate(-80%, 10px);
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: .9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s, visibility .5s, transform .5s;
+    background: rgba(0, 0, 0, .35);
+    color: #fff;
+    z-index: 10000;
+}
+
+#toast.reveal {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-80%, 0)
 }

@@ -2,37 +2,44 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<link rel="stylesheet" href="css/style2.css">
-		<title>Insert title here</title>
-		<script type="text/javascript"
-			src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	</head>
-	<body>
-		<div class="wrapper">
-			<table id="calTable" border="2px">
-			</table>
-		</div>
-		<div>
-			<form action="calculator" method="post" id="form">
-				<input type="hidden" name="firstNum" id="first" value="${result}" />
-				<input type="hidden" name="operator" id="opper" value="${operator}" />
-				<input type="hidden" name="secondNum" id="second" /> <input
-					type="hidden" name="secondOpper" id="secondOpper"
-					value="${secondOpper}" />
-			</form>
-		</div>
-		<script>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<table id="calTable" border="2px">
+		</table>
+		<div id="toast"></div>
+	</div>
+	<div>
+		<form action="calculator" method="post" id="form">
+			<input type="hidden" name="firstNum" id="first" value="${result}" />
+			<input type="hidden" name="operator" id="opper" value="${operator}" />
+			<input type="hidden" name="secondNum" id="second" /> <input
+				type="hidden" name="secondOpper" id="secondOpper"
+				value="${secondOpper}" />
+		</form>
+	</div>
+	<script>
+		var dotAlertFlag = ${alertFlag}; 	
+		// 계산 가능 허용치 이상의 경고알람 설정
 		window.onload = function(){
 			if(document.getElementById("show").value + 1 > 9223372036854775807){
-				alert("9223372036854775807 이하만 표현 가능합니다.")
+				toast("정수 9223372036854775807 이하만 표현 가능합니다.")
 				document.getElementById("out").value = ""
 				document.getElementById("show").value = ""
+			} else if (dotAlertFlag) {
+				toast("소수점 6자리 이상만 표현 가능합니다.");
+				dotAlertFlag = false;
 			}
 		}
-				
-				
+		
+		
+		// 테이블내의 UI 생성
 		let value = ["😍","AC", "DEL", "/", 
 					 "7", "8", "9", "*",
 					 "4", "5", "6", "-",
@@ -43,10 +50,10 @@
 		
 		let script ="";
 		script += `<tr class="row">
-					<td colspan="4"><input class="inputText" id="out" value="${formula}"/></td>
+					<td colspan="4"><input class="inputText" id="out" value="${formula}" readonly/></td>
 				   	</tr>
 					<tr class="row">
-					<td colspan="4"><input class="inputText" id="show" value="${result}"/></td>
+					<td colspan="4"><input class="inputText" id="show" value="${result}" readonly/></td>
 					</tr>`;
 					
 		let cnt = 0;
@@ -65,51 +72,60 @@
 			}
 		}
 		document.getElementById("calTable").innerHTML = script;
-				
+		
+		// num클래스 클릭 이벤트
 		$(".num").on('click', (e) => {
 			key = e.target.value;
-			switch (key) {
-				case "AC:
-					$(location).attr('href', '/Calculator/calculator');
-					break;
-				case ".:
-					break;
-				case "DEL:
-					del()
-					break;
-				case "😍":
-				case "🥰":
-					alert("😍😍완전소중~🥰🥰")
-					break;
-				case ==: // 넘버 미구현
+				// key 파라미터가 숫자가 아닐경우
+				if (isNaN(key)) {
+					switch (key) {
+						case "AC":
+							$(location).attr('href', '/Calculator/calculator');
+							break;
+						case ".":
+							getDot(key)
+							break;
+						case "DEL":
+							del()
+							break;
+						case "😍":
+						case "🥰":
+							toast("😍😍완전소중~🥰🥰")
+							break;
+					}
+				// key 파라미터가 숫자일 경우
+				}else{
 					getNum(key);
-			}
+				}
 			document.getElementById('secondOpper').value = "";
 		});
 			
-		var myform = document.getElementById("form");
+
 		
 		$(".op").on('click', (e) => {
 			key = e.target.value;
+			out = document.getElementById('out');
 			if(key == "="){
 				submits();
-			}
-			else if (document.getElementById('secondOpper').value == ""){
+			}else if (document.getElementById('secondOpper').value == ""){
 				getOper(key);
 			}else{
 				document.getElementById('opper').value = key;
-				out = document.getElementById('out');
 				outValue = out.value.substring(0, out.value.length - 1);
 				outValue += key;
 				document.getElementById('out').value = outValue;
 			}
 		
 		});
+		
+		// 입력 숫자를 담을 변수
+		var numbers = "";
+		// dot 입력 플래그 스위치
+		var dotFlag = true;
 			
-		var out = document.getElementById('out')	
-		var numbers="";
-			
+		// 연산자 입력시
 		function getOper(key) {
+			// 연산자 이전의 숫자를 담은 변수
 			numbers = document.getElementById('show').value;
 			if(numbers != ""){
 				if(document.getElementById('opper').value == ""){
@@ -122,38 +138,45 @@
 					document.getElementById('secondOpper').value = key;
 					submits();
 				}
+			dotFlag = true;
 			}
 		}
-			
+		
+		// dot입력시
+		function getDot(dot) {
+			if (document.getElementById('show').value != '') {
+				if (dotFlag) {
+					numbers += dot;
+					dotFlag = false;
+				}
+			}
+			document.getElementById('show').value = numbers;
+		}
+		
+		// del키가 입력시
 		function del() {
 			if (document.getElementById('show').value != "") {
+				if (numbers.substr(-1) == ".") {
+					dotFlag = true;
+				}
 				numbers = numbers.substring(0, numbers.length - 1);
 			}
 			document.getElementById('show').value = numbers;
 		}
-			
-		function outDel(key) {
-			if (document.getElementById('oper').value != "") {
-				out = out.substring(0, out.length - 1);
-			}
-			document.getElementById('out').value = out;
-		}
-		
+
+		// 숫자가 입력시
 		function getNum(num) {
 			if (document.getElementById('show').value == '0') {
-				if (num == ".") {
-					numbers += num;		
-				} else {
-					numbers = num;
-				}
+				numbers = num
 			} else {
 				numbers += num;
 			}
 			document.getElementById('show').value = numbers;
 		}
 		
-		
+		// form 태그의 값들을 post방식으로 서블렛에 전송
 		function submits() {
+			let myform = document.getElementById("form");
 			if (numbers != "") {
 				if (document.getElementById('opper').value != "") {
 					document.getElementById('second').value = numbers;
@@ -161,6 +184,22 @@
 				}
 			}
 		}
+		
+		let removeToast;
+
+		function toast(string) {
+		    const toast = document.getElementById("toast");
+
+		    toast.classList.contains("reveal") ?
+		        (clearTimeout(removeToast), removeToast = setTimeout(function () {
+		            document.getElementById("toast").classList.remove("reveal")
+		        }, 1000)) :
+		        removeToast = setTimeout(function () {
+		            document.getElementById("toast").classList.remove("reveal")
+		        }, 1000)
+		    toast.classList.add("reveal"),
+		        toast.innerText = string
+		}
 		</script>
-	</body>
+</body>
 </html>
