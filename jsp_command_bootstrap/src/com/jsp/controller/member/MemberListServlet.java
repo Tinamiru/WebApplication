@@ -1,9 +1,6 @@
 package com.jsp.controller.member;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,29 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.jsp.context.ApplicationContext;
-import com.jsp.dto.MemberVO;
-import com.jsp.service.MemberService;
+import com.jsp.action.Action;
+import com.jsp.action.MemberListAction;
 
 @WebServlet("/member/list")
 public class MemberListServlet extends HttpServlet {
-	private MemberService service;
-	{
-		Map<String, Object> container = ApplicationContext.getApplicationContext();
-		this.service = (MemberService) container.get("memberService");
-	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String url = "/WEB-INF/views/member/list.jsp";
-
-		List<MemberVO> memberList;
+		Action action = new MemberListAction();
+		String url = null;
 		try {
-			memberList = service.getMemberList();
-			request.setAttribute("memberList", memberList);
-		} catch (SQLException e) {
+			url = action.process(request, response);
+		} catch (Exception e) {
 			e.printStackTrace();
-			url = "/WEB-INF/views/error/500.jsp";
 		}
 		request.getRequestDispatcher(url).forward(request, response);
 	}

@@ -92,6 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 									<th>등록날짜</th>
 									<!-- yyyy-MM-dd  -->
 								</tr>
+
 								<c:if test="${!empty memberList }">
 									<c:forEach items="${memberList }" var="member">
 										<tr>
@@ -103,11 +104,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 											<td><fmt:formatDate value="${member.regDate }"
 													pattern="yyyy-MM-dd" /></td>
 										</tr>
+										<c:if test="${empty memberList }">
+											<td colspan="7" class="text-center">해당 내용이 없습니다</td>
+										</c:if>
+									</c:forEach>
 								</c:if>
-								<c:if test="${empty memberList }">
-									<td colspan="7" class="text-center">해당 내용이 없습니다</td>
-								</c:if>
-								</c:forEach>
 
 							</table>
 						</div>
