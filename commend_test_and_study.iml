@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$USER_HOME$/Downloads/jstl-1.2.jar!/" />
+    <libelement value="jar://$USER_HOME$/Downloads/mybatis-3.5.0.jar!/" />
+    <libelement value="jar://$USER_HOME$/Downloads/ojdbc6-11.2.0.3.jar!/" />
+    <conelement value="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5" />
+    <conelement value="org.eclipse.jst.j2ee.internal.web.container" />
+    <conelement value="org.eclipse.jst.j2ee.internal.module.container" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$/commend_test_and_study/src" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/commend_test_and_study/rec" expected_position="1" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/commend_test_and_study/build/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/commend_test_and_study">
+      <sourceFolder url="file://$MODULE_DIR$/commend_test_and_study/rec" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/commend_test_and_study/src" isTestSource="false" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="jdk" jdkName="jdk1.8.0_321" jdkType="JavaSDK" />
+    <orderEntry type="library" name="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5" level="application" />
+    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.web.container" level="application" />
+    <orderEntry type="library" name="org.eclipse.jst.j2ee.internal.module.container" level="application" />
+    <orderEntry type="module-library">
+      <library name="jstl-1.2.jar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/jstl-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mybatis-3.5.0.jar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/mybatis-3.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ojdbc6-11.2.0.3.jar">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/ojdbc6-11.2.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

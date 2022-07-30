@@ -10,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/JSP_basic.iml" filepath="$PROJECT_DIR$/JSP_basic.iml" />
       <module fileurl="file://$PROJECT_DIR$/JSP_bootstrap.iml" filepath="$PROJECT_DIR$/JSP_bootstrap.iml" />
       <module fileurl="file://$PROJECT_DIR$/Servers.iml" filepath="$PROJECT_DIR$/Servers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commend_test_and_study.iml" filepath="$PROJECT_DIR$/commend_test_and_study.iml" />
       <module fileurl="file://$PROJECT_DIR$/jsp_command_bootstrap.iml" filepath="$PROJECT_DIR$/jsp_command_bootstrap.iml" />
       <module fileurl="file://$PROJECT_DIR$/servlet_basic.iml" filepath="$PROJECT_DIR$/servlet_basic.iml" />
     </modules>

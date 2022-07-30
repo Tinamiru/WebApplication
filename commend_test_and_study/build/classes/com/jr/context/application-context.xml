@@ -1,0 +1,19 @@
+<beans>
+	<bean id="sqlSessionFactory"
+		class="com.jr.datasource.MybastisSqlSessionFactory" />
+
+<!-- 	<bean id="action" class="com.jr.action.MemberListAction" /> -->
+
+<!-- 	<bean id="memberServlet" class="com.jr.controller.member.MemberServlet"> -->
+<!-- 		<property name="action" ref-value="action" /> -->
+<!-- 	</bean> -->
+
+	<bean id="memberDAO" class="com.jr.dao.MemberDAOImpl">
+		<property name="sqlSessionFactory"
+			ref-value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="memberService" class="com.jr.service.MemberServiceImpl">
+		<property name="memberDAO" ref-value="memberDAO" />
+	</bean>
+</beans>
