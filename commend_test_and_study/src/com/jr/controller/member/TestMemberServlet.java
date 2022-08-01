@@ -23,6 +23,7 @@ public class TestMemberServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println("url: "+url);
 		request.getRequestDispatcher(url).forward(request, response);
 	}
 

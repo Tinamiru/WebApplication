@@ -9,4 +9,33 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
+  
+	<servlet>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<servlet-class>com.jsp.controller.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>url.properties</param-name>
+			<param-value>com/jsp/properties/url</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DispatcherServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+
 </web-app>
+
+
+
+
+
+
+
+
+
+
+
+

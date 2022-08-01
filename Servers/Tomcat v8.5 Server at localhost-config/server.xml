@@ -152,7 +152,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="Calculator" path="/Calculator" reloadable="true" source="org.eclipse.jst.jee.server:Calculator"/><Context docBase="JSP_basic" path="/JSP_basic" reloadable="true" source="org.eclipse.jst.jee.server:JSP_basic"/><Context docBase="JSP_EL" path="/JSP_EL" reloadable="true" source="org.eclipse.jst.jee.server:JSP_EL"/><Context docBase="servlet_basic" path="/servlet_basic" reloadable="true" source="org.eclipse.jst.jee.server:servlet_basic"/><Context docBase="JSP_JSTL" path="/JSP_JSTL" reloadable="true" source="org.eclipse.jst.jee.server:JSP_JSTL"/><Context docBase="jsp_command_bootstrap" path="/jsp_command_bootstrap" reloadable="true" source="org.eclipse.jst.jee.server:jsp_command_bootstrap"/><Context docBase="JSP_bootstrap" path="/JSP_bootstrap" reloadable="true" source="org.eclipse.jst.jee.server:JSP_bootstrap"/></Host>
+      <Context docBase="jsp_command_bootstrap" path="/jsp_command_bootstrap" reloadable="true" source="org.eclipse.jst.jee.server:jsp_command_bootstrap"/></Host>
     </Engine>
   </Service>
 </Server>
