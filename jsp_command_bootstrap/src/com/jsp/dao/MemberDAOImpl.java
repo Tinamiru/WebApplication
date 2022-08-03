@@ -25,9 +25,24 @@ public class MemberDAOImpl implements MemberDAO {
 			int offset = cri.getStartRowNum();
 			int limit = cri.getPerPageNum();
 			RowBounds rowBounds = new RowBounds(offset, limit);
-			
-			List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList", null, rowBounds);
+
+			List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList", cri, rowBounds);
 			return memberList;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (session != null)
+				session.close();
+		}
+	}
+
+	@Override
+	public int selectMemberListCount(Criteria cri) throws SQLException {
+		SqlSession session = sqlSessionFactory.openSession();
+		try {
+
+			int count = session.selectOne("Member-Mapper.selectMemberListCount", cri);
+			return count;
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -54,7 +69,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public void insertMember(MemberVO member) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			session.insert("Member-Mapper.insertMember",member); 
+			session.insert("Member-Mapper.insertMember", member);
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -67,7 +82,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public void updateMember(MemberVO member) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			session.update("Member-Mapper.updateMember",member); 
+			session.update("Member-Mapper.updateMember", member);
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -80,7 +95,7 @@ public class MemberDAOImpl implements MemberDAO {
 	public void deleteMember(String id) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			session.delete("Member-Mapper.deleteMember",id); 
+			session.delete("Member-Mapper.deleteMember", id);
 		} catch (Exception e) {
 			throw e;
 		} finally {
