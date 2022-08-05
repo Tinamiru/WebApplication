@@ -222,10 +222,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				processData:false,
 				contentType:false,
 				success:function(data){
-					
+					//업로드 확인변수 세팅
+					$('input[name="checkUpload"]').val(1);
+					$('input#oldFile').val(data);
+					$('form[role="form"] input[name="picture"]').val(data);
+					alert("사진이 업로드 되었습니다.")
 				},
 				error:function(error){
-					
+					alert("현재 사진 업로드가 불가합니다. \n 관리자에게 연락바랍니다.")
 				}
 			});
 			
