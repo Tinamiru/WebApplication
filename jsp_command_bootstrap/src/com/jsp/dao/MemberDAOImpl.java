@@ -27,13 +27,16 @@ public class MemberDAOImpl implements MemberDAO {
 			RowBounds rowBounds = new RowBounds(offset, limit);
 
 			List<MemberVO> memberList = session.selectList("Member-Mapper.selectMemberList", cri, rowBounds);
+
 			return memberList;
 		} catch (Exception e) {
+
 			throw e;
 		} finally {
 			if (session != null)
 				session.close();
 		}
+
 	}
 
 	@Override
@@ -44,20 +47,23 @@ public class MemberDAOImpl implements MemberDAO {
 			int count = session.selectOne("Member-Mapper.selectMemberListCount", cri);
 			return count;
 		} catch (Exception e) {
+
 			throw e;
 		} finally {
 			if (session != null)
 				session.close();
 		}
+
 	}
 
 	@Override
 	public MemberVO selectMemberById(String id) throws SQLException {
 		SqlSession session = sqlSessionFactory.openSession();
 		try {
-			MemberVO member = (MemberVO) session.selectList("Member-Mapper.selectMemberById");
+			MemberVO member = session.selectOne("Member-Mapper.selectMemberById", id);
 			return member;
 		} catch (Exception e) {
+			// 에러처리
 			throw e;
 		} finally {
 			if (session != null)
