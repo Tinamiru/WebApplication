@@ -183,8 +183,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 	<script>
 window.onload=function(){
-	MemberPictureThumb('<%=request.getContextPath()%>
-		');
+	MemberPictureThumb('<%=request.getContextPath()%>');
 		}
 	</script>
 
@@ -206,20 +205,6 @@ window.onload=function(){
 				action : url,
 				method : 'get'
 			}).submit();
-		}
-	</script>
-
-	<script>
-		//팝업창들 뛰우기
-		//새로운 Window창을 Open할 경우 사용되는 함수 ( arg : 주소 , 창타이틀 , 넓이 , 길이 )
-		function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
-			winleft = (screen.width - WinWidth) / 2;
-			wintop = (screen.height - WinHeight) / 2;
-			var win = window.open(UrlStr, WinTitle, "scrollbars=yes,width="
-					+ WinWidth + ", " + "height=" + WinHeight + ", top="
-					+ wintop + ", left=" + winleft
-					+ ", resizable=yes, status=yes");
-			win.focus();
 		}
 	</script>
 
