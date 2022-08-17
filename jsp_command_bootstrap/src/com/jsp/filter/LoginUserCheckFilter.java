@@ -1,6 +1,7 @@
 package com.jsp.filter;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -36,6 +37,7 @@ public class LoginUserCheckFilter implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
 
+		// 제외할 url 확인
 		String reqUrl = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
 
 		if (excludeCheck(reqUrl)) {
@@ -46,26 +48,34 @@ public class LoginUserCheckFilter implements Filter {
 		// login check
 		HttpSession session = httpReq.getSession();
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
+
 		// login 확인
-		if (loginUser == null) {
-			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do");
+		if (loginUser == null) { // 비로그인 상태
+			String contextPath = httpReq.getContextPath();
+			String retUrl = httpReq.getRequestURI().replace(contextPath, "");
+
+			String queryString = httpReq.getQueryString();
+			if (queryString != null) {
+				retUrl += "?" + URLEncoder.encode(queryString, "utf-8");
+			}
+
+			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do?error=-1&retUrl=" + retUrl);
 			JSPViewResolver.view(httpReq, httpResp);
+
 		} else {
 			chain.doFilter(request, response);
 		}
+
 	}
 
 	private boolean excludeCheck(String url) {
 		boolean result = false;
-		System.out.println("url len: " + url.length());
+
 		result = result || url.length() <= 1;
-		System.out.println("up: "+result);
+
 		for (String exURL : exURLs) {
-			System.out.println("url contains: "+url.contains(exURL));
 			result = result || url.contains(exURL);
 		}
-		System.out.println("dw: "+result);
-		System.out.println();
 		return result;
 	}
 
