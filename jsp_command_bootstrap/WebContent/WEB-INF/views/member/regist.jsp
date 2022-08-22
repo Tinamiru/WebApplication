@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
+
 <div>
   	 <section class="content-header">
 	  	<div class="container-fluid">
@@ -246,6 +248,7 @@
 	              checkedID=input_ID.val().trim();
 	              $('input[name="id"]').val(input_ID.val().trim());	             
 	           } 
+	           
 			},
 			error:function(error){
 		       alert("시스템장애로 가입이 불가합니다.");
@@ -283,10 +286,11 @@
 		     	   "action":"regist.do"
 		   		  });	   
 		form.submit();
+		   
+		
 	}
 </script>
-  
-
+ 
 
 
 

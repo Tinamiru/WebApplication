@@ -36,22 +36,18 @@ public class FileDownloadResolver {
 		String sendFileName = 
 		MakeFileName.parseFileNameFromUUID(downloadFile.getName(), "\\$\\$");
 		
-		
 		String header = request.getHeader("User-Agent");
 		if (header.contains("MSIE")) {
 			sendFileName = URLEncoder.encode(sendFileName, "UTF-8");
 		} else {
 			sendFileName = new String(sendFileName.getBytes("utf-8"),"ISO-8859-1");
 		}
-		
-		
 		String headerValue = String.format("attachment; filename=\"%s\"", sendFileName);
 		response.setHeader(headerKey, headerValue);
 		
 		// 파일 내보내기
 		FileInputStream inStream = new FileInputStream(downloadFile);
 		OutputStream outStream = response.getOutputStream();
-		
 		try {
 			byte[] buffer = new byte[4096];
 			int bytesRead = -1;
@@ -65,5 +61,16 @@ public class FileDownloadResolver {
 			inStream.close();
 		}
 	}
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+

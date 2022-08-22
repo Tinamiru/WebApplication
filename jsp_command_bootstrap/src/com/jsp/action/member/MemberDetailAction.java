@@ -10,7 +10,6 @@ import com.jsp.service.MemberService;
 public class MemberDetailAction implements Action {
 
 	private MemberService memberService;
-
 	public void setSearchMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
@@ -23,14 +22,14 @@ public class MemberDetailAction implements Action {
 
 		try {
 			MemberVO member = memberService.getMember(id);
-
+			
 			request.setAttribute("member", member);
-
-		} catch (Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 			// ........
 			url = "/member/detail_fail";
-			// response.sendError(response.SC_INTERNAL_SERVER_ERROR);
+			//response.sendError(response.SC_INTERNAL_SERVER_ERROR);
 		}
 
 		return url;

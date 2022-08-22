@@ -30,6 +30,7 @@ public class HandlerMapper {
 			
 			Class<?> actionClass = Class.forName(actionClassName);
 			Action commandAction = (Action)actionClass.newInstance();
+			
 			//의존주입(service, dao.......)
 			//의존성 확인 및 조립
 			Method[] methods = actionClass.getMethods();

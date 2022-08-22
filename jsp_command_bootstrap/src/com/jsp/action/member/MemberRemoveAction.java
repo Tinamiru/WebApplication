@@ -14,7 +14,6 @@ import com.jsp.service.MemberService;
 public class MemberRemoveAction implements Action {
 
 	private MemberService memberService;
-
 	public void setSearchMemberService(MemberService memberService) {
 		this.memberService = memberService;
 	}
@@ -32,13 +31,13 @@ public class MemberRemoveAction implements Action {
 
 		try {
 			File deletePictureFile = new File(savedPath, picture);
-			if (deletePictureFile.exists()) {
+			if (deletePictureFile.exists())
 				deletePictureFile.delete();
-			}
-
 		} catch (Exception e) {
-			System.out.println("사진이 업습니다.");
+			// e.printStackTrace();
+			System.out.println("사진이 없습니다.");
 		}
+
 		// DB 삭제
 		memberService.remove(id);
 

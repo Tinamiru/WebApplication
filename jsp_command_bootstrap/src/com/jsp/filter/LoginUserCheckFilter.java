@@ -19,54 +19,59 @@ import javax.servlet.http.HttpSession;
 import com.jsp.controller.JSPViewResolver;
 import com.jsp.dto.MemberVO;
 
+
 public class LoginUserCheckFilter implements Filter {
-
+	
 	private List<String> exURLs = new ArrayList<String>();
-
+	
 	public void init(FilterConfig fConfig) throws ServletException {
 		String excludeURLNames = fConfig.getInitParameter("exclude");
-
+		
 		StringTokenizer st = new StringTokenizer(excludeURLNames, ",");
 		while (st.hasMoreTokens()) {
 			exURLs.add(st.nextToken().trim());
 		}
 	}
+	
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpResp = (HttpServletResponse) response;
-
+		
 		// 제외할 url 확인
 		String reqUrl = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
-
+		
 		if (excludeCheck(reqUrl)) {
 			chain.doFilter(request, response);
 			return;
 		}
-
+		
 		// login check
 		HttpSession session = httpReq.getSession();
 		MemberVO loginUser = (MemberVO) session.getAttribute("loginUser");
-
-		// login 확인
-		if (loginUser == null) { // 비로그인 상태
+		
+		//login 확인
+		if(loginUser==null) { //비로그인 상태
 			String contextPath = httpReq.getContextPath();
-			String retUrl = httpReq.getRequestURI().replace(contextPath, "");
-
+			String retUrl = httpReq.getRequestURI().replace(contextPath,"");
+			
 			String queryString = httpReq.getQueryString();
-			if (queryString != null) {
-				retUrl += "?" + URLEncoder.encode(queryString, "utf-8");
+			if(queryString!=null) {
+				retUrl+="?"+URLEncoder.encode(queryString,"utf-8");
 			}
-
-			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do?error=-1&retUrl=" + retUrl);
+			
+			httpReq.setAttribute("viewName", "redirect:/common/loginForm.do?error=-1&retUrl="+retUrl);
 			JSPViewResolver.view(httpReq, httpResp);
-
-		} else {
-			chain.doFilter(request, response);
+			
+		}else {
+			chain.doFilter(request, response);	
 		}
-
+		
+		
 	}
+	
+	
 
 	private boolean excludeCheck(String url) {
 		boolean result = false;
@@ -78,8 +83,16 @@ public class LoginUserCheckFilter implements Filter {
 		}
 		return result;
 	}
+	
 
-	public void destroy() {
-	}
+	public void destroy() {}
 
 }
+
+
+
+
+
+
+
+
