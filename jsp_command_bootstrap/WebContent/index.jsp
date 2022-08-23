@@ -4,7 +4,7 @@
     
 <script>
 	if('${loginUser.id}'){
-		location.href="<%=request.getContextPath()%>/member.do";
+		location.href="<%=request.getContextPath()%>/member/list.do";
 	}else{
 		location.href="<%=request.getContextPath()%>/common/loginForm.do";
 	}
