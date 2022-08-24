@@ -72,13 +72,16 @@ public class DispatcherServlet extends HttpServlet {
 				} catch (Exception e) {					
 					e.printStackTrace();
 					//Exception 처리
-					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);					
+					System.out.println("view is null");
+					response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);	
 				}
 				
 			}else {
+				System.out.println("action is null");
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}	
 		}else {
+			System.out.println("handlerMapper is null");
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 		
