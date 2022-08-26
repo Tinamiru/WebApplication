@@ -9,6 +9,7 @@
 	</bean>
 	<bean id = "noticeDAO" class="com.jsp.dao.NoticeDAOImpl" />
 	<bean id = "boardDAO" class="com.jsp.dao.BoardDAOImpl" />
+	<bean id = "replyDAO" class="com.jsp.dao.ReplyDAOImpl" />
 			
 	<!-- Service -->
 	<bean id="memberService" class="com.jsp.service.MemberServiceImpl" >
@@ -21,7 +22,13 @@
 	<bean id="boardService" class="com.jsp.service.BoardServiceImpl" >
 		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
 		<property name="boardDAO" ref-value="boardDAO" />
+		<property name="replyDAO" ref-value="replyDAO" /> 
 	</bean>
+	<bean id="replyService" class="com.jsp.service.ReplyServiceImpl" >
+		<property name="sqlSessionFactory" ref-value="sqlSessionFactory" />
+		<property name="replyDAO" ref-value="replyDAO" /> 
+	</bean>
+
 	
 </beans>
 

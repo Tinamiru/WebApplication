@@ -3,14 +3,17 @@ package com.jsp.dto;
 import java.util.Date;
 
 public class BoardVO {
+	
 
-	private int bno;
+	private int bno;          // 게시판번호
 	private String title;
 	private String writer;
 	private String content;
-	private Date regDate = new Date();
-	private int viewcnt;
-	private String dist;
+	private int viewcnt;      // 조회수
+	private Date regDate;     // 등록날짜
+	private Date updatedate;  // 수정날짜
+	
+	private int replycnt; // 댓글 개수
 
 	public int getBno() {
 		return bno;
@@ -44,14 +47,6 @@ public class BoardVO {
 		this.content = content;
 	}
 
-	public Date getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
 	public int getViewcnt() {
 		return viewcnt;
 	}
@@ -60,16 +55,27 @@ public class BoardVO {
 		this.viewcnt = viewcnt;
 	}
 
-	public String getDist() {
-		return dist;
+	public Date getRegDate() {
+		return regDate;
 	}
 
-	public void setDist(String dist) {
-		this.dist = dist;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
 
-	@Override
-	public String toString() {
-		return this.bno + "";
+	public Date getUpdatedate() {
+		return updatedate;
+	}
+
+	public void setUpdatedate(Date updatedate) {
+		this.updatedate = updatedate;
+	}
+
+	public int getReplycnt() {
+		return replycnt;
+	}
+
+	public void setReplycnt(int replycnt) {
+		this.replycnt = replycnt;
 	}
 }

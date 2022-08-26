@@ -10,7 +10,7 @@ import com.jsp.service.BoardService;
 public class BoardDetailAction implements Action {
 	
 	private BoardService boardService;
-	public void setNoticeService(BoardService boardService) {
+	public void setBoardService(BoardService boardService) {
 		this.boardService = boardService;
 	}
 	
@@ -21,7 +21,7 @@ public class BoardDetailAction implements Action {
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		String from = request.getParameter("from");
 		
-		BoardVO board = null;
+		BoardVO board;
 		
 		if (from != null && from.equals("list")) {
 			board = boardService.getBoard(bno);
