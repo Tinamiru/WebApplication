@@ -146,31 +146,33 @@
 </form>
 
 <script>
-	function modify_go(){
-		var formObj = $("form[role='form']");
-		formObj.attr({
-			'action':'modifyForm.do',
-			'method':'post'
-		});
+function modify_go(){
+	var formObj = $("form[role='form']");
+	formObj.attr({
+		'action':'modifyForm.do',
+		'method':'post'
+	});
+	formObj.submit();
+}
+function remove_go(){
+	var formObj = $("form[role='form']");
+	var answer = confirm("정말 삭제하시겠습니까?");
+	if(answer){		
+		formObj.attr("action", "remove.do");
+		formObj.attr("method", "post");
 		formObj.submit();
 	}
-	function remove_go(){
-		var formObj = $("form[role='form']");
-		var answer = confirm("정말 삭제하시겠습니까?");
-		if(answer){		
-			formObj.attr("action", "remove.do");
-			formObj.attr("method", "post");
-			formObj.submit();
-		}
-	}
+}
 </script>
 
 <%@ include file="./reply_js.jsp" %>
-
-
-
-
-
-
-
 </body>
+
+
+
+
+
+
+
+
+

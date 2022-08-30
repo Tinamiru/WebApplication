@@ -36,8 +36,8 @@
 	</a>
 </li>
 {{#each pageNum}}
-<li class="paginate_button page-item {{     this}} ">
-	<a href="javascript:getPage('<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page={{this}}',{{this}});" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
+<li class="paginate_button page-item {{signActive this}} ">
+	<a href="{{this}}" aria-controls="example2" data-dt-idx="1" tabindex="0" class="page-link">
 		{{this}}
 	</a>
 </li>
@@ -58,17 +58,23 @@
 
 
 
-
-
 <script>
-
-
-
 
 var replyPage=1;
 
 window.onload=function(){
 	getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+	
+	$('ul#pagination').on('click','li a',function(event){
+		//alert($(this).attr("href"));
+		
+		replyPage=$(this).attr("href");
+		
+		getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+		
+		return false;
+	});
+		
 }
 
 function getPage(pageInfo,page){
@@ -78,7 +84,7 @@ function getPage(pageInfo,page){
 	
 		console.log(data);
 		
-		printData(data.replyList, $('#repliesDiv'),$('#reply-list-template'));
+		printData(data.replyList,$('#repliesDiv'),$('#reply-list-template'));
 		printPagination(data.pageMaker,$('ul#pagination'),$('#reply-pagination-template'));
 	});
 }
@@ -102,7 +108,7 @@ function printPagination(pageMaker,target,templateObject){
 	
 	var template=Handlebars.compile(templateObject.html());	
 	var html = template(pageMaker);	
-	target.html("").html(html);
+	target.html(html);
 }
 
 
@@ -118,12 +124,96 @@ Handlebars.registerHelper({
 		var result="none";		
 		if(replyer == "${loginUser.id}") result="visible";		
 		return result;						  
+	},
+	"signActive":function(pageNum){
+		if(pageNum == replyPage) return 'active';
 	}
 });
 
 
 </script>
 
+<script>
+function replyRegist_go(){
+	//alert("add reply btn click");	
+
+	var replytext=$('#newReplyText').val();
+	var bno=$('input[name="bno"]').val();
+	
+	if(!replytext){
+		alert("내용은 필수입니다.");
+		return;
+	}
+	
+	var data={
+			"bno":bno,
+			"replyer":"${loginUser.id}",
+			"replytext":replytext	
+	}
+	
+	//console.log(data);
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/regist.do",
+		type:"post",
+		data:JSON.stringify(data),	
+		contentType:'application/json',
+		success:function(data){
+			alert('댓글이 등록되었습니다.\n마지막페이지로 이동합니다.');
+			replyPage=data; //페이지이동
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno="+bno+"&page="+data); //리스트 출력
+			
+			$('#newReplyText').val("");	
+		},
+		error:function(error){
+			alert('댓글이 등록을 실패했습니다.');	
+		}
+	});
+	
+}
+
+
+function replyModifyModal_go(rno){	
+	//alert("reply modify modal");
+	$('div#modifyModal div.modal-body #replytext').val($('div#'+rno+'-replytext').text());
+	$('div#modifyModal div.modal-header h4.modal-title').text(rno);
+} 
+
+
+function replyModify_go(){
+	//alert("reply modify btn");
+	
+	var rno=$('.modal-title').text();
+	var replytext=$('#replytext').val();
+	
+	var sendData={
+			"rno":rno,
+			"replytext":replytext
+	}
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/modify.do",
+		type:"post",
+		data:JSON.stringify(sendData),
+		contentType:"application/json",
+		success:function(result){
+			alert("수정되었습니다.");	
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+ replyPage);
+			},
+			error : function() {
+				alert('수정 실패했습니다.');
+			},
+			complete : function() {
+				$('#modifyModal').modal('hide');
+			}
+		});
+
+	}
+
+	function replyRemove_go() {
+		alert("reply remove btn");
+	}
+</script>
 
 
 
