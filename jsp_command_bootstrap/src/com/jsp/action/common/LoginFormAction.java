@@ -9,15 +9,18 @@ public class LoginFormAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url="/common/loginForm";
-		
+		String url = "/common/loginForm";
 
-		String retUrl = request.getParameter("retUrl");		
-		
-		request.setAttribute("retUrl", retUrl);		
-		
+		String error = request.getParameter("error");
+		if (error != null && error.equals("-1")) {
+			response.setStatus(302);
+		}
+
+		String retUrl = request.getParameter("retUrl");
+
+		request.setAttribute("retUrl", retUrl);
+
 		return url;
 	}
-	
-	
+
 }

@@ -166,7 +166,8 @@ function replyRegist_go(){
 			$('#newReplyText').val("");	
 		},
 		error:function(error){
-			alert('댓글이 등록을 실패했습니다.');	
+			let status = error.status;
+			AjaxErrorSecurityRedirectHandler(status);
 		}
 	});
 	
@@ -197,22 +198,46 @@ function replyModify_go(){
 		data:JSON.stringify(sendData),
 		contentType:"application/json",
 		success:function(result){
+			
+// 			console.log(result);
+			
 			alert("수정되었습니다.");	
-			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+ replyPage);
-			},
-			error : function() {
-				alert('수정 실패했습니다.');
-			},
-			complete : function() {
-				$('#modifyModal').modal('hide');
-			}
-		});
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
+		},
+		error:function(){
+			alert('수정 실패했습니다.');	
+			AjaxErrorSecurityRedirectHandler(error.status);
+		},
+		complete:function(){
+			$('#modifyModal').modal('hide');
+		}
+	});
+}
 
-	}
-
-	function replyRemove_go() {
-		alert("reply remove btn");
-	}
+function replyRemove_go(){
+	//alert("reply remove btn");
+	
+	var rno=$('.modal-title').text();
+	
+	//alert(rno);
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/reply/remove.do?rno="+rno+"&page="+replyPage+"&bno=${board.bno}",
+		type:"get",
+		success:function(page){
+			alert("삭제되었습니다.");
+			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+page);
+			replyPage=page;
+		},
+		error:function(error){
+			//alert('삭제 실패했습니다.');
+			AjaxErrorSecurityRedirectHandler(error.status);	
+		},
+		complete:function(){
+			$('#modifyModal').modal('hide');
+		}
+	});
+}
 </script>
 
 

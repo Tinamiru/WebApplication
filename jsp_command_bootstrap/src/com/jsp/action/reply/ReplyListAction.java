@@ -11,23 +11,21 @@ import com.jsp.controller.JSONViewResolver;
 import com.jsp.service.ReplyService;
 
 public class ReplyListAction implements Action {
-
+	
 	private ReplyService replyService;
-
 	public void setReplyService(ReplyService replyService) {
 		this.replyService = replyService;
 	}
-
+	
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = null;
-
-		int bno = Integer.parseInt(request.getParameter("bno"));
-
+		String url=null;
+		
+		int bno = Integer.parseInt(request.getParameter("bno"));		
 		int page = Integer.parseInt(request.getParameter("page"));
 		
 		Criteria cri = new Criteria();
-		
 		cri.setPage(page);
 		
 		Map<String, Object> dataMap = replyService.getReplyList(bno, cri);
@@ -36,5 +34,13 @@ public class ReplyListAction implements Action {
 		
 		return url;
 	}
-
 }
+
+
+
+
+
+
+
+
+

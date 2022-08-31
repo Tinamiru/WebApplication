@@ -36,11 +36,12 @@ public class ExLoginAction implements Action {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", memberService.getMember(id));
-			session.setMaxInactiveInterval(15*60);
+			session.setMaxInactiveInterval(10);
 		
 		} catch (NotFoundIdException | InvalidPasswordException e) {
 			//e.printStackTrace();
 			request.setAttribute("msg", e.getMessage());
+			request.setAttribute("retUrl", retUrl);
 			url = "/common/login_fail";
 			
 		} catch (Exception e) {
