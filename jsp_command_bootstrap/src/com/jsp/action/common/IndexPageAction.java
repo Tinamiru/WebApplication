@@ -20,26 +20,37 @@ public class IndexPageAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/common/indexPage";
-
+		String url="/common/indexPage";
+		
 		String mCode = request.getParameter("mCode");
 		
-		if(mCode == null) mCode="M000000";
+		if(mCode ==null) mCode="M000000";
+		
 		try {
-			// GNB
-			List<MenuVO> menuList = menuService.getMainMenuList();
+			//GNB
+			List<MenuVO> menuList = menuService.getMainMenuList();			
 			request.setAttribute("menuList", menuList);
-
-			// iframe 상태 유지
+			
+			// iframe 상태유지
 			MenuVO menu = menuService.getMenuByMcode(mCode);
 			request.setAttribute("menu", menu);
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// Exception 처리 : log 기록...
 			throw e;
 		}
-
+		
 		return url;
 	}
 }
+
+
+
+
+
+
+
+
+
+

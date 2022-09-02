@@ -23,12 +23,17 @@ public class NoticeListAction implements Action {
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String url = "/notice/list";
 		
-		CriteriaCommand criCom = HttpRequestParameterAdapter.execute(request, CriteriaCommand.class);
 		
-		Criteria cri = criCom.toCriteria();
+		CriteriaCommand criCom 
+			= HttpRequestParameterAdapter.execute(request, CriteriaCommand.class);
+		
+		Criteria cri=criCom.toCriteria();
+		
+		
 		Map<String,Object> dataMap = noticeService.getNoticeList(cri);
 		
 		request.setAttribute("dataMap",dataMap);
+		
 		
 		return url;
 	}

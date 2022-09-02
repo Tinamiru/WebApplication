@@ -9,35 +9,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jsp.action.Action;
-import com.jsp.action.common.SummernoteDeleteImgCommand;
-import com.jsp.controller.FileDownloadResolver;
+import com.jsp.command.SummernoteDeleteImgCommand;
 import com.jsp.controller.GetUploadPath;
 
 public class SummernoteDeleteImgAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = null;
-
+		String url=null;
+		
 		ObjectMapper mapper = new ObjectMapper();
-
-		SummernoteDeleteImgCommand delReq = mapper.readValue(request.getReader(), SummernoteDeleteImgCommand.class);
-
+		SummernoteDeleteImgCommand delReq 
+					= mapper.readValue(request.getReader(), SummernoteDeleteImgCommand.class);
+		
 		String savePath = GetUploadPath.getUploadPath("summernote.img");
-		String fileName = URLDecoder.decode(delReq.getFileName(), "utf-8");
+		String fileName = URLDecoder.decode(delReq.getFileName(),"utf-8");
+				
 
 		File target = new File(savePath + File.separator + fileName);
-
+		
 		if (!target.exists()) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} else {
 			target.delete();
-
+			
 			response.setContentType("text/plain;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.print(fileName + " 이미지를 삭제했습니다.");
+			out.print(fileName + " 이미지를 삭제했습니다.");	
 		}
-
+		
 		return url;
 	}
 

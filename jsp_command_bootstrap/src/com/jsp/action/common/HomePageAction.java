@@ -9,9 +9,9 @@ public class HomePageAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/common/home";
+		String url="/common/home";
 		
-		request.setAttribute("category", "home");
+		request.setAttribute("category","Home");
 		
 		return url;
 	}

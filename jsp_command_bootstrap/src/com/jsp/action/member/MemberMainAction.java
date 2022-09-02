@@ -5,13 +5,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jsp.action.Action;
 
-public class MemberMainAction implements Action {
-
+public class MemberMainAction implements Action{
+	
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/member/main";
+		String url="/member/main";
 		
-		request.setAttribute("category", "member");
+		request.setAttribute("category","member");
 		
 		return url;
 	}

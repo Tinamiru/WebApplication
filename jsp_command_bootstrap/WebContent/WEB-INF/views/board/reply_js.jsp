@@ -166,8 +166,7 @@ function replyRegist_go(){
 			$('#newReplyText').val("");	
 		},
 		error:function(error){
-			let status = error.status;
-			AjaxErrorSecurityRedirectHandler(status);
+			AjaxErrorSecurityRedirectHandler(error.status);				
 		}
 	});
 	
@@ -199,14 +198,13 @@ function replyModify_go(){
 		contentType:"application/json",
 		success:function(result){
 			
-// 			console.log(result);
+			console.log(result);
 			
 			alert("수정되었습니다.");	
 			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+replyPage);
 		},
-		error:function(){
-			alert('수정 실패했습니다.');	
-			AjaxErrorSecurityRedirectHandler(error.status);
+		error:function(error){
+			AjaxErrorSecurityRedirectHandler(error.status);	
 		},
 		complete:function(){
 			$('#modifyModal').modal('hide');
@@ -229,8 +227,7 @@ function replyRemove_go(){
 			getPage("<%=request.getContextPath()%>/reply/list.do?bno=${board.bno}&page="+page);
 			replyPage=page;
 		},
-		error:function(error){
-			//alert('삭제 실패했습니다.');
+		error:function(error){			
 			AjaxErrorSecurityRedirectHandler(error.status);	
 		},
 		complete:function(){

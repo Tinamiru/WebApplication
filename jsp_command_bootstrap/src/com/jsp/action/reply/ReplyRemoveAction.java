@@ -40,11 +40,10 @@ public class ReplyRemoveAction implements Action {
 		if (page > realEndPage) {			
 			page = realEndPage;
 		}
-		
+
 		PrintWriter out = response.getWriter();
 		out.print(page);
 		out.close();
-
 		
 		return url;
 	}

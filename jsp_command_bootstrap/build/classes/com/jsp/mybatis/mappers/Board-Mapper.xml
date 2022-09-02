@@ -9,7 +9,7 @@
 			and title like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'w'.toString()">
-			and w riter like '%'||#{keyword}||'%'			
+			and writer like '%'||#{keyword}||'%'			
 		</if>
 		<if test="searchType == 'c'.toString()">
 			and content like '%'||#{keyword}||'%'			

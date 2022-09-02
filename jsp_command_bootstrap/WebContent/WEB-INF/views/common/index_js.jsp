@@ -67,9 +67,9 @@ function goPage(url,mCode){
 	}
 }
 
+
 goPage('<%=request.getContextPath()%>${menu.murl}','${menu.mcode}');
 subMenu_go('${menu.mcode}'.substring(0,3)+"0000");
-
 </script>
 
 

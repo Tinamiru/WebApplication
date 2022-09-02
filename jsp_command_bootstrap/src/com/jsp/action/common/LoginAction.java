@@ -32,6 +32,7 @@ public class LoginAction implements Action{
 				//세션처리
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser",member);
+				session.setMaxInactiveInterval(5);
 				
 				return url;
 			}else { //패스워드 불일치

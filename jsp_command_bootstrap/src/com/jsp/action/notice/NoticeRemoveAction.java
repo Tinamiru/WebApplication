@@ -24,5 +24,6 @@ public class NoticeRemoveAction implements Action {
 		
 		return url;
 	}
-
+	
+	
 }

@@ -9,11 +9,12 @@ public class BoardMainAction implements Action {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String url = "/board/main";
+		String url="/board/main";
 		
-		request.setAttribute("category", "board");
+		request.setAttribute("category","board");
 		
 		return url;
 	}
-
+	
+	
 }
