@@ -82,8 +82,8 @@
 			//alert(this.files[0].size);
 			if(this.files[0].size>1024*1024*40){
 	 			alert("파일 용량이 40MB를 초과하였습니다.");
-	 			this.value="";
-	 			$(this)[0].click();		 			
+	 			this.click();
+	 			this.value="";	 					
 	 			return false;
 	 		} 
 		});
@@ -96,21 +96,21 @@ function regist_go(){
 	
 	var files = $('input[name="uploadFile"]');
 	for(var file of files){
-		console.log(file.name+" : " + file.value);
-		if(file.value == ""){
+		console.log(file.name+" : "+file.value);
+		if(file.value==""){
 			alert("파일을 선택하세요.");
 			file.focus();
 			file.click();
 			return;
-			
 		}
-	}
+	}	
 	
-	if($("input[name='title']").val()==""){
+	if($("input[name='title']").val()==""){ //form.title.value
 		alert("제목은 필수입니다.");
 		$("input[name='title']").focus();
 		return;
 	}
+	
 	
 	$("form[role='form']").submit()
 }
